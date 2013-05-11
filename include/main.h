@@ -19,5 +19,9 @@
 #include <math.h>
 //Lua4PS3
 #include "lua4ps3.h"
+#include "screen.h"
+#include "draw.h"
+#include "controls.h"
+#include "image.h"
 
 
