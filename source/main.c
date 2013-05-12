@@ -7,6 +7,7 @@
 extern int luaopen_screen(lua_State *l);
 extern int luaopen_draw(lua_State *l);
 extern int luaopen_controls(lua_State *l);
+extern int luaopen_image(lua_State *l);
 
 
 char *script_lua = 
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
 		luaopen_draw(L);
 		luaopen_screen(L);
 		luaopen_controls(L);
-		
+		luaopen_image(L);
 		
 	//Loop Lua
 		/*
@@ -72,8 +73,7 @@ int main(int argc, char *argv[])
 		}
 	*/
 	
-	lua4ps3_texture texture;
-	lua4ps3_loadPNGfromBuffer((void *)pngsample_png, pngsample_png_size, &texture);
+	lua4ps3_texture *texture = lua4ps3_loadPNGfromBuffer((void *)pngsample_png, pngsample_png_size);
 	float angle = 0.0f;
 	int x = 50, y = 100;
 	int size = 50;
@@ -97,17 +97,19 @@ int main(int argc, char *argv[])
 		if(y<0) y = 0;
 						
 		
-		lua4ps3_blitTetxure(50, 90, &texture);
-		lua4ps3_blitRotateTetxure(500, 310, angle, &texture);
+		lua4ps3_blitTetxure(50, 90, texture);
+		lua4ps3_blitRotateTetxure(500, 310, angle, texture);
 		
 		lua4ps3_draw_fillrect(x, y, size, size, 0xFF0000FF);
 			
 		lua4ps3_screen_flip();
+		if(lua4ps3_paddata[0].BTN_START) break;
 		angle += 0.05f;
 	}
 	
 	//Cleanup
 		lua_close(L);
 		lua4ps3_end();
+		lua4ps3_freeTexture(texture);
 	return 0;
 }

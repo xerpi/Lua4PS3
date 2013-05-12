@@ -136,6 +136,12 @@ run:
 pkg:	$(BUILD) $(OUTPUT).pkg
 
 #---------------------------------------------------------------------------------
+
+dropbox: pkg
+	rm -f "/home/xerpi/Dropbox/xerpi - Lua4PS3 testing/Lua4PS3.pkg"
+	cp Lua4PS3.pkg "/home/xerpi/Dropbox/xerpi - Lua4PS3 testing"
+
+
 else
 
 DEPENDS	:=	$(OFILES:.o=.d)
