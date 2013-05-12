@@ -3,6 +3,8 @@
 
 #include <tiny3d.h>
 #include <pngdec/pngdec.h>
+#include <jpgdec/jpgdec.h>
+#include <string.h>
 
 typedef struct
 {
@@ -14,9 +16,14 @@ typedef struct
 	u32 texture_offset;
 }lua4ps3_texture;
 
+
 u32  lua4ps3_loadPNGfromFile(char *filename, lua4ps3_texture* texture);
 u32  lua4ps3_loadPNGfromBuffer(void *buffer, u32 buf_size, lua4ps3_texture* texture);
 
+u32  lua4ps3_loadJPGfromFile(char *filename, lua4ps3_texture* texture);
+u32  lua4ps3_loadJPGfromBuffer(void *buffer, u32 buf_size, lua4ps3_texture* texture);
+
 void lua4ps3_blitTetxure(int x, int y, lua4ps3_texture* tex);
+void lua4ps3_blitRotateTetxure(int x, int y, float angle, lua4ps3_texture* tex);
 
 #endif

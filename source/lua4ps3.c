@@ -20,7 +20,7 @@ void lua4ps3_init()
 			   (u32 *) AddFontFromBitmapArray((u8 *) msxfont, (u8 *) lua4ps3_texture_pointer,  0, 254,  8,  8, 1, BIT7_FIRST_PIXEL);
 			SetCurrentFont(DEFAULT_FONT);
 			SetFontColor(0xffffffff, 0x0);
-			SetFontSize(12, 24);
+			SetFontSize(8, 12);
 
 	//Load modules
 		sysModuleLoad(SYSMODULE_FS);

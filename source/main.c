@@ -1,8 +1,13 @@
 #include "main.h"
+#include "pngsample_png.h"
+
+#define SCREEN_W 848
+#define SCREEN_H 512
 
 extern int luaopen_screen(lua_State *l);
 extern int luaopen_draw(lua_State *l);
 extern int luaopen_controls(lua_State *l);
+
 
 char *script_lua = 
 {
@@ -41,7 +46,7 @@ int main(int argc, char *argv[])
 		
 		
 	//Loop Lua
-		
+		/*
 		int s = luaL_loadstring(L, script_lua);
 		while(1)
 		{
@@ -65,31 +70,41 @@ int main(int argc, char *argv[])
 					sysUtilCheckCallback();
 				}
 		}
+	*/
 	
-	/*int x = 50, y = 100;
+	lua4ps3_texture texture;
+	lua4ps3_loadPNGfromBuffer((void *)pngsample_png, pngsample_png_size, &texture);
+	float angle = 0.0f;
+	int x = 50, y = 100;
+	int size = 50;
 	while(1)
 	{
 		lua4ps3_screen_clear();
 		lua4ps3_screen_begin_drawing();
 		lua4ps3_controls_read();
 		
-		DrawFormatString(15, 15, "Lua4PS3 version: %.2f\n", _LUA4PS3_VERSION_ );
+		DrawFormatString(15, 15, "Lua4PS3 version: %.2f ----- by xerpi\n", _LUA4PS3_VERSION_ );
 		
-		if(lua4ps3_paddata[0].BTN_RIGHT) x+=1;
-		if(lua4ps3_paddata[0].BTN_LEFT)  x-=1;
-		if(lua4ps3_paddata[0].BTN_DOWN) y+=1;
-		if(lua4ps3_paddata[0].BTN_UP)  y-=1;
-		if(lua4ps3_paddata[0].BTN_CROSS)  lua4ps3_draw_fillrect(200, 100, 100, 100, 0x00FF00FF);
+		if(lua4ps3_paddata[0].BTN_RIGHT) x+=10;
+		if(lua4ps3_paddata[0].BTN_LEFT)  x-=10;
+		if(lua4ps3_paddata[0].BTN_DOWN)  y+=10;
+		if(lua4ps3_paddata[0].BTN_UP)    y-=10;
+		if(lua4ps3_paddata[0].BTN_CROSS)  lua4ps3_draw_fillrect(200, 350, 100, 100, rand());
 		
-		if(x>818) x = 818;
-		if(x<0) x = 30;
-		if(y>490) y = 490;
+		if(x > (SCREEN_W-size)) x = SCREEN_W-size;
+		if(x<0) x = 0;
+		if(y > (SCREEN_H-size)) y = SCREEN_H-size;
 		if(y<0) y = 0;
-					
-		lua4ps3_draw_fillrect(x, y, 60, 60, 0xFF0000FF);
+						
+		
+		lua4ps3_blitTetxure(50, 90, &texture);
+		lua4ps3_blitRotateTetxure(500, 310, angle, &texture);
+		
+		lua4ps3_draw_fillrect(x, y, size, size, 0xFF0000FF);
 			
 		lua4ps3_screen_flip();
-	}*/
+		angle += 0.05f;
+	}
 	
 	//Cleanup
 		lua_close(L);
