@@ -45,7 +45,7 @@ LDFLAGS		=	$(MACHDEP) -Wl,-Map,$(notdir $@).map
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS	:= 	-lfont -ltiny3d -lsimdmath -lgcm_sys -lio -lsysutil -lrt -llv2 -lpngdec -ljpgdec -lsysmodule -lm
+LIBS	:= 	-lya2d -lfont -ltiny3d -lsimdmath -lgcm_sys -lio -lsysutil -lrt -llv2 -lpngdec -ljpgdec -lsysmodule -lm
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
@@ -138,7 +138,7 @@ pkg:	$(BUILD) $(OUTPUT).pkg
 #---------------------------------------------------------------------------------
 
 dropbox: pkg
-	rm -f "/home/xerpi/Dropbox/xerpi - Lua4PS3 testing/Lua4PS3.pkg"
+	rm -f "/home/xerpi/Dropbox/xerpi - Lua4PS3 testing/xerpi stuff/Lua4PS3.pkg"
 	cp Lua4PS3.pkg "/home/xerpi/Dropbox/xerpi - Lua4PS3 testing"
 
 

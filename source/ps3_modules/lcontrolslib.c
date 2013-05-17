@@ -1,5 +1,5 @@
 #include <io/pad.h>
-#include "controls.h"
+#include <ya2d/ya2d.h>
 
 #define lcontrolslib_c
 #define LUA_LIB
@@ -11,12 +11,12 @@
 
 static int controls_read (lua_State *L)
 {
-	lua4ps3_controls_read();
+	ya2d_controlsRead();
 	return 0;
 }
 
 //([n,] BUTTON)
-static int controls_pressed (lua_State *L)
+static int controls_held (lua_State *L)
 {
 	int pad = 0;
 	int button = luaL_checkint(L, 1);
@@ -25,7 +25,7 @@ static int controls_pressed (lua_State *L)
 		pad = button;
 		button = luaL_checkint(L, 2);
 	}
-	lua_pushboolean(L, lua4ps3_paddata[pad].BTN_CROSS);
+	lua_pushboolean(L, ya2d_paddata[pad].BTN_CROSS);
 	return 0;
 }
 
@@ -34,7 +34,7 @@ static int controls_pressed (lua_State *L)
 static const luaL_Reg controlslib[] =
 {
 	{"read",   controls_read},
-	{"pressed",   controls_pressed},
+	{"held",   controls_held},
 	{NULL, NULL}
 };
 

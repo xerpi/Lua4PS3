@@ -1,6 +1,5 @@
 #include <tiny3d.h>
-#include <io/pad.h>
-#include "draw.h"
+#include <ya2d/ya2d.h>
 
 #define ldrawlib_c
 #define LUA_LIB
@@ -21,7 +20,7 @@ static int draw_rect (lua_State *L)
 		int w = luaL_checkint(L, 3);
 		int h = luaL_checkint(L, 4);         
 		u32 color = luaL_checkunsigned(L, 5);         
-		lua4ps3_draw_rect(x, y, w, h, color);
+		ya2d_drawRect(x, y, w, h, color);
 	}
 	return 0;
 }
@@ -37,7 +36,7 @@ static int draw_fillrect (lua_State *L)
 		int w = luaL_checkint(L, 3);
 		int h = luaL_checkint(L, 4);         
 		u32 color = luaL_checkunsigned(L, 5);        
-		lua4ps3_draw_fillrect(x, y, w, h, color);
+		ya2d_drawFillRect(x, y, w, h, color);
 	}
 	return 0;
 }

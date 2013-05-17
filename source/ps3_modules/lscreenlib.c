@@ -1,7 +1,6 @@
 #include <tiny3d.h>
 #include <libfont.h>
-#include <io/pad.h>
-#include "screen.h"
+#include <ya2d/ya2d.h>
 
 #define lscreenlib_c
 #define LUA_LIB
@@ -18,22 +17,22 @@ static int screen_clear (lua_State *L)
 	/*if(lua_gettop(L) == 0)
 	{
 		lua_Unsigned color = luaL_checkint(L, 1);
-		lua4ps3_screen_set_clear_color(color);
+		ya2d_screenSetClearColor(color);
 	}*/
-	lua4ps3_screen_clear();
+	ya2d_screenClear();
 	return 0;
 }
 
 
 static int screen_flip (lua_State *L)
 {
-	lua4ps3_screen_flip();
+	ya2d_screenFlip();
 	return 0;
 }
 
 static int screen_begindrawing (lua_State *L)
 {
-	lua4ps3_screen_begin_drawing();
+	ya2d_screenBeginDrawing();
 	return 0;
 }
 
@@ -50,6 +49,12 @@ static int screen_print(lua_State *L)
 	return 0;
 }
 
+static int screen_fps(lua_State *L)
+{
+	lua_pushnumber(L, (lua_Number)ya2d_screenFPS());
+	return 1;
+}
+
 
 
 static const luaL_Reg screenlib[] =
@@ -58,6 +63,7 @@ static const luaL_Reg screenlib[] =
   {"flip",   screen_flip},
   {"begindrawing",   screen_begindrawing},
   {"print",   screen_print},
+  {"fps",   screen_fps},
   {NULL, NULL}
 };
 

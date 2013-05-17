@@ -9,6 +9,7 @@
 #include <io/pad.h>
 #include <tiny3d.h>
 #include <libfont.h>
+#include <ya2d/ya2d.h>
 //C includes
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,9 +20,5 @@
 #include <math.h>
 //Lua4PS3
 #include "lua4ps3.h"
-#include "screen.h"
-#include "draw.h"
-#include "controls.h"
-#include "image.h"
 
 
